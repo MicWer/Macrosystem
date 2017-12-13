@@ -9736,23 +9736,28 @@ var Users = function (_Component) {
         var _this = _possibleConstructorReturn(this, (Users.__proto__ || Object.getPrototypeOf(Users)).call(this, props));
 
         _this.state = {
-            users: []
+            selectedUsers: []
         };
         return _this;
     }
 
     _createClass(Users, [{
-        key: "deleteRow",
-        value: function deleteRow(id) {}
+        key: "rowDelete",
+        value: function rowDelete() {
+
+            var userList = document.getElementById(this.props.id).lastChild;
+            console.log(userList);
+        }
     }, {
         key: "render",
         value: function render() {
+            var _this2 = this;
 
             var users = this.props.users;
 
             return _react2.default.createElement(
                 "table",
-                null,
+                { id: this.props.id, className: "striped responsive-table" },
                 _react2.default.createElement(
                     "thead",
                     null,
@@ -9782,7 +9787,7 @@ var Users = function (_Component) {
                     users.map(function (user) {
                         return _react2.default.createElement(
                             "tr",
-                            { key: user.id },
+                            { key: 100 + user.id },
                             _react2.default.createElement(
                                 "td",
                                 null,
@@ -9801,7 +9806,20 @@ var Users = function (_Component) {
                             _react2.default.createElement(
                                 "td",
                                 null,
-                                _react2.default.createElement("input", { type: "checkbox" })
+                                _react2.default.createElement(
+                                    "a",
+                                    {
+                                        id: user.id,
+                                        className: "btn-floating btn waves-effect waves-light red",
+                                        onClick: _this2.rowDelete.bind(_this2)
+                                    },
+                                    _react2.default.createElement(
+                                        "i",
+                                        { className: "material-icons" },
+                                        "-"
+                                    )
+                                ),
+                                _react2.default.createElement("input", { type: "checkbox", value: user.id, onClick: _this2.rowDelete.bind(_this2) })
                             )
                         );
                     })
@@ -9911,10 +9929,22 @@ var Main = exports.Main = function (_Component) {
             console.log('Rendering users: ', this.state.users);
             return _react2.default.createElement(
                 'div',
-                null,
+                { className: 'container' },
                 _react2.default.createElement(_diagram2.default, null),
-                _react2.default.createElement(_users2.default, { users: this.state.users }),
-                _react2.default.createElement(_users2.default, { users: this.state.users }),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'row' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col l6' },
+                        _react2.default.createElement(_users2.default, { id: "women", users: this.state.users })
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col l6' },
+                        _react2.default.createElement(_users2.default, { id: "men", users: this.state.users })
+                    )
+                ),
                 _react2.default.createElement(_controls2.default, null)
             );
         }
@@ -22380,3 +22410,4 @@ module.exports = traverseAllChildren;
 
 /***/ })
 /******/ ]);
+//# sourceMappingURL=app.js.map

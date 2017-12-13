@@ -6,12 +6,14 @@ export default class Users extends Component {
 
         super(props);
         this.state = {
-            users: []
+            selectedUsers: []
         }
     }
 
-    deleteRow(id){
+    rowDelete() {
 
+        let userList = document.getElementById(this.props.id).lastChild;
+        console.log(userList);
     }
 
     render() {
@@ -19,7 +21,7 @@ export default class Users extends Component {
         let users = this.props.users;
 
         return (
-            <table>
+            <table id={this.props.id} className="striped responsive-table">
                 <thead>
                 <tr>
                     <td>Name</td>
@@ -29,11 +31,20 @@ export default class Users extends Component {
                 </thead>
                 <tbody>
                 {users.map(user => {
-                    return <tr key={user.id}>
+                    return <tr key={100 + user.id}>
                         <td>{user.name}</td>
                         <td>{user.surname}</td>
                         <td>{user.pesel}</td>
-                        <td><input type="checkbox"/></td>
+                        <td>
+                            <a
+                                id={user.id}
+                               className="btn-floating btn waves-effect waves-light red"
+                               onClick={this.rowDelete.bind(this)}
+                            >
+                                <i className="material-icons">-</i>
+                            </a>
+                            <input type="checkbox" value={user.id} onClick={this.rowDelete.bind(this)}/>
+                        </td>
                     </tr>
                 })}
                 </tbody>

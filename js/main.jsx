@@ -35,10 +35,17 @@ export class Main extends Component {
     render() {
         console.log('Rendering users: ', this.state.users);
         return (
-            <div>
+            <div className="container">
                 <Diagram/>
-                <Users users={this.state.users}/>
-                <Users users={this.state.users}/>
+                <div className="row">
+                    <div className="col l6">
+                        <Users id={"women"} users={this.state.users}/>
+                    </div>
+                    <div className="col l6">
+                        <Users id={"men"} users={this.state.users}/>
+                    </div>
+                </div>
+
                 <Controls/>
             </div>
         )

@@ -2,6 +2,7 @@ module.exports = {
     entry: "./js/main.jsx",
     output: { filename: "./app/app.js" },
     watch: true,
+    devtool: "source-map",
     module: {
         loaders: [
             {
